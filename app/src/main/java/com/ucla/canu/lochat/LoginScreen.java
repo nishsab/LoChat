@@ -64,6 +64,10 @@ public class LoginScreen extends AppCompatActivity  implements DownloadCompleteL
         makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/login");
     }
 
+    public void createUser(View view) {
+        makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/register");
+    }
+
     private void makeRequestWithOkHttp(String url) {
         JSONObject jObject = new JSONObject();
         try {
@@ -74,7 +78,7 @@ public class LoginScreen extends AppCompatActivity  implements DownloadCompleteL
         }
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"),jObject.toString().getBytes());
         OkHttpClient client = new OkHttpClient();
-        okhttp3.Request request = new okhttp3.Request.Builder().url("https://lochat.codyleyhan.com/api/v1/auth/login").post(requestBody).build();  // 2
+        okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(requestBody).build();  // 2
 
         client.newCall(request).enqueue(new okhttp3.Callback() { // 3
             @Override
