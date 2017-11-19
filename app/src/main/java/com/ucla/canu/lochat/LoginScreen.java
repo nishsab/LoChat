@@ -65,10 +65,10 @@ public class LoginScreen extends AppCompatActivity  implements DownloadCompleteL
         String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
         String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
 
-//        makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/login");
+        makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/login");
 
-        Intent intent = new Intent(this, ChatPage.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, ChatPage.class);
+//        startActivity(intent);
     }
 
     public void createUser(View view) {
