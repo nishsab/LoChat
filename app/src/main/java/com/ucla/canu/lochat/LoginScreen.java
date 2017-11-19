@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,9 @@ public class LoginScreen extends AppCompatActivity  implements DownloadCompleteL
     }
 
     public void sendMessage(View view) {
+        String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
+        String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
+
         makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/login");
     }
 
@@ -73,6 +77,8 @@ public class LoginScreen extends AppCompatActivity  implements DownloadCompleteL
         try {
             jObject.put("email","xyz@gmail.com");
             jObject.put("password","xyzabc");
+//            jObject.put("email",EMAIL);
+//            jObject.put("password",PASSWORD);
         } catch (JSONException e) {
             e.printStackTrace();
         }
