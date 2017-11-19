@@ -23,9 +23,9 @@ public class HomeScreen extends AppCompatActivity {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String token = ((MyApplication)getApplicationContext()).getToken();
-        String email = intent.getStringExtra(LoginScreen.EMAIL);
-        String password = intent.getStringExtra(LoginScreen.PASSWORD);
-        String message = String.format("%s:%s",email,token);
+        //String email = intent.getStringExtra(LoginScreen.EMAIL);
+        //String password = intent.getStringExtra(LoginScreen.PASSWORD);
+        String message = String.format("%s",token);
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.textView);

@@ -41,11 +41,12 @@
         tools:layout_editor_absoluteY="77dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/newUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
+        android:onClick="createUser"
         android:text="@string/new_user"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
