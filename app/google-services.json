@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "462022020577",
+    "firebase_url": "https://lochat-ba2c1.firebaseio.com",
+    "project_id": "lochat-ba2c1",
+    "storage_bucket": "lochat-ba2c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462022020577:android:043dc70d86eaa2e9",
+        "android_client_info": {
+          "package_name": "com.ucla.canu.lochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462022020577-fgc25ud443822lj3c7i4s2i4rkm2bvt4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ucla.canu.lochat",
+            "certificate_hash": "2f4cabc2ef1ddfc32136395a727879ca867fbd96"
+          }
+        },
+        {
+          "client_id": "462022020577-aapttr47t6qt25gs06ceem2ghhl7du7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH5CDr1I0PAoFp4aK9Y0dpTqO23JO4FTE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462022020577-aapttr47t6qt25gs06ceem2ghhl7du7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

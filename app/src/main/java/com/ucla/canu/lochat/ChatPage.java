@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import enums.DownloadCompleteEnum;
+import enums.EndpointsEnum;
 
 public class ChatPage extends AppCompatActivity {
 
@@ -14,6 +16,8 @@ public class ChatPage extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
+
+
         String text = ((EditText)findViewById(R.id.message_staging)).getText().toString();
 
 
