@@ -30,7 +30,7 @@ android:layout_alignParentBottom="true"
 android:orientation="horizontal" >
 
     <EditText
-        android:id="@+id/editMessage"
+        android:id="@+id/message_staging"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical|center_horizontal"

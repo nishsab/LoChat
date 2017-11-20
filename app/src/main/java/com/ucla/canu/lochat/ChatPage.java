@@ -3,6 +3,7 @@ package com.ucla.canu.lochat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class ChatPage extends AppCompatActivity {
 
@@ -13,6 +14,8 @@ public class ChatPage extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
-        int x = 0;
+        String text = ((EditText)findViewById(R.id.message_staging)).getText().toString();
+
+
     }
 }

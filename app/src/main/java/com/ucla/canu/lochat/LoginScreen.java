@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -115,7 +116,10 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
         String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
         String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
 
-        makeRequestWithOkHttp(EndpointsEnum.LOGIN.getValue());
+//        makeRequestWithOkHttp(EndpointsEnum.LOGIN.getValue());
+
+        Intent intent = new Intent(this, ChatPage.class);
+        startActivity(intent);
     }
 
     public void createUser(View view) {
