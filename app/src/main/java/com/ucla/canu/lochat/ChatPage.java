@@ -4,11 +4,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.firebase.ui.database.FirebaseListAdapter;
+
 import enums.DownloadCompleteEnum;
 import enums.EndpointsEnum;
 
 public class ChatPage extends AppCompatActivity {
-
+    private FirebaseListAdapter<ChatMessage> adapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
