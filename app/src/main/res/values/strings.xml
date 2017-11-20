@@ -4,4 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="new_user">New User</string>
+    <string name="radius">Radius</string>
+    <string name="create_room">Create Room</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
