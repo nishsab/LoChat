@@ -112,7 +112,9 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
     }
 
     public void sendMessage(View view) {
-        //makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/login");
+        String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
+        String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
+
         makeRequestWithOkHttp(EndpointsEnum.LOGIN.getValue());
     }
 
