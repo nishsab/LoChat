@@ -18,7 +18,7 @@ public class ChatPage extends AppCompatActivity {
     public void sendMessage(View view){
 
 
-        String text = ((EditText)findViewById(R.id.message_staging)).getText().toString();
+//        String text = ((EditText)findViewById(R.id.message_staging)).getText().toString();
 
 
     }
