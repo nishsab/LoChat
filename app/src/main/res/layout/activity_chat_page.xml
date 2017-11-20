@@ -1,61 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="com.ucla.canu.lochat.ChatPage">
 
-<ScrollView
-    android:id="@+id/scroll"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_above="@+id/ll_send_message"
-    android:layout_alignParentTop="true"
-    android:orientation="vertical" >
-
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
-</ScrollView>
-
-<LinearLayout
-android:id="@+id/ll_send_message"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
-android:orientation="horizontal" >
-
-    <EditText
-        android:id="@+id/message_staging"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_weight="5"
-        android:hint="Get Chattin\'"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_send"
+        android:tint="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app:fabSize="mini"
         />
-        <!--android:background="@drawable/edit"-->
-        android:gravity="top|left"
-        android:inputType="textMultiLine|textCapSentences"
-        android:maxLines="5"
-        android:minLines="3"
-        android:scrollHorizontally="false"
-        <!--android:textColor="@color/text1" -->
 
-<Button
-    android:id="@+id/buttonSend"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical|center_horizontal"
-    android:hint="Send"
-    android:onClick="sendMessage"
-/>    <!--android:background="@drawable/button_normal"-->
-    android:gravity="center"
-    android:text="send"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-</LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/fab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        >
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Get Chattin'"
+            
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <ListView
+        android:id="@+id/list_messages"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/fab"
+        android:dividerHeight="6dp"
+        android:divider="@android:color/transparent"
+        android:layout_marginBottom="16dp"
+        
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+<!--<ScrollView-->
+    <!--android:id="@+id/scroll"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_above="@+id/ll_send_message"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:orientation="vertical" >-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linear"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical" >-->
+    <!--</LinearLayout>-->
+<!--</ScrollView>-->
+
+<!--<LinearLayout-->
+<!--android:id="@+id/ll_send_message"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_alignParentBottom="true"-->
+<!--android:orientation="horizontal" >-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/message_staging"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_gravity="center_vertical|center_horizontal"-->
+        <!--android:layout_weight="5"-->
+        <!--android:hint="Get Chattin\'"-->
+        <!--/>-->
+        <!--&lt;!&ndash;android:background="@drawable/edit"&ndash;&gt;-->
+        <!--android:gravity="top|left"-->
+        <!--android:inputType="textMultiLine|textCapSentences"-->
+        <!--android:maxLines="5"-->
+        <!--android:minLines="3"-->
+        <!--android:scrollHorizontally="false"-->
+        <!--&lt;!&ndash;android:textColor="@color/text1" &ndash;&gt;-->
+
+<!--<Button-->
+    <!--android:id="@+id/buttonSend"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical|center_horizontal"-->
+    <!--android:hint="Send"-->
+    <!--android:onClick="sendMessage"-->
+<!--/>    &lt;!&ndash;android:background="@drawable/button_normal"&ndash;&gt;-->
+    <!--android:gravity="center"-->
+    <!--android:text="send"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+<!--</LinearLayout>-->
 
     </RelativeLayout>
