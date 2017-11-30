@@ -1,24 +1,34 @@
 package com.ucla.canu.lochat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.wifi.WifiManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import android.location.LocationListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 import enums.DownloadCompleteEnum;
 import enums.EndpointsEnum;
@@ -38,49 +48,82 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
     private String lon;
 
     private FusedLocationProviderClient mFusedLocationClient;
+    LocationManager locationManager = null;
 
     @Override
-    public void downloadComplete(DownloadCompleteEnum stage, String response, String error) {
-        if (stage == DownloadCompleteEnum.GET_TOKEN) {
-            if (!response.equals("")) {
+    public void downloadComplete(String response, String error) {
+        if (!response.equals("")) {
                 /*final Intent intent = new Intent(this, HomeScreen.class);
                 //intent.putExtra(EMAIL, "test");
                 intent.putExtra(LAT, this.lat);
                 intent.putExtra(LON, this.lon);
                 startActivity(intent);*/
-                getRooms(response);
-            } else {
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-                dlgAlert.setMessage(error);
-                dlgAlert.setTitle("Error!");
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
+            //getRooms(response);
+            getLatLon(response);
+        } else {
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+            dlgAlert.setMessage(error);
+            dlgAlert.setTitle("Error!");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
 
-                dlgAlert.setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        });
-            }
+                        }
+                    });
         }
     }
 
     @Override
     public void getRoomsComplete(String message) {
-            //final Intent intent = new Intent(this, HomeScreen.class);
-            final Intent intent = new Intent(this, ListRoomsScreen.class);
-            //intent.putExtra(EMAIL, "test");
-            intent.putExtra(ROOMS_LIST, message);
-            intent.putExtra(LON, this.lon);
-            startActivity(intent);
+        //final Intent intent = new Intent(this, HomeScreen.class);
+        final Intent intent = new Intent(this, ListRoomsScreen.class);
+        //intent.putExtra(EMAIL, "test");
+        intent.putExtra(ROOMS_LIST, message);
+        intent.putExtra(LAT, this.lat);
+        intent.putExtra(LON, this.lon);
+        startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+                    }
+
+                    @Override
+                    public void onLocationChanged(final Location location) {
+                    }
+                });
+    }
+
+    public void getLatLon(final String message) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -92,8 +135,8 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        lat = "34.068921";
-        lon = "-118.445181";
+        //lat = "34.068921";
+        //lon = "-118.445181";
         mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -101,12 +144,51 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                         // Got last known location. In some rare situations this can be null.
 
                         if (location == null) {
-                            lat = "34.068921";
-                            lon = "-118.445181";
+                            String locationProvider = LocationManager.NETWORK_PROVIDER;
+// Or use LocationManager.GPS_PROVIDER
+
+                            if (ActivityCompat.checkSelfPermission(LoginScreen.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(LoginScreen.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+                                return;
+                            }
+                            locationManager.requestLocationUpdates(
+                                    LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+                                        @Override
+                                        public void onStatusChanged(String provider, int status, Bundle extras) {
+                                        }
+
+                                        @Override
+                                        public void onProviderEnabled(String provider) {
+                                        }
+
+                                        @Override
+                                        public void onProviderDisabled(String provider) {
+                                        }
+
+                                        @Override
+                                        public void onLocationChanged(final Location location) {
+                                        }
+                                    });
+                            Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+                            if (lastKnownLocation == null) {
+                                lat = "34.068921";
+                                lon = "-118.445181";
+                            }
+                            else {
+                                lat = String.valueOf(lastKnownLocation.getLatitude());
+                                lon = String.valueOf(lastKnownLocation.getLongitude());
+                            }
                         } else {
-                            lat = String.format("%d",location.getLatitude());
-                            lon = String.format("%d",location.getLongitude());
+                            lat = String.format("%f",location.getLatitude());
+                            lon = String.format("%f",location.getLongitude());
                         }
+                        getRooms(message);
                     }
                 });
     }
@@ -165,7 +247,7 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                 LoginScreen.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        downloadComplete(DownloadCompleteEnum.GET_TOKEN, result,error);  // 5
+                        downloadComplete(result,error);  // 5
                     }
                 });
             }

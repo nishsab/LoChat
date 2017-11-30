@@ -37,6 +37,9 @@ public class ListRoomsScreen extends AppCompatActivity {
         adapter = new RoomClassAdapter(this, Rooms);
         list.setAdapter(adapter);
         Intent intent = getIntent();
+        String lat = intent.getStringExtra(LoginScreen.LAT);
+        String lon = intent.getStringExtra(LoginScreen.LON);
+        System.out.println(String.format("Lat: %s Lon: %s",lat,lon));
         String jsonRooms = intent.getStringExtra(LoginScreen.ROOMS_LIST);
 
         CreateListView(jsonRooms);

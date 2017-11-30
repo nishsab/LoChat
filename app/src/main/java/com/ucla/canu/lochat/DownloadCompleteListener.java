@@ -7,6 +7,7 @@ import enums.DownloadCompleteEnum;
  */
 
 public interface DownloadCompleteListener {
-    void downloadComplete(DownloadCompleteEnum stage, String response, String error);
+    void downloadComplete(String response, String error);
     void getRoomsComplete(String message);
+    //void gotLatLon(String message);
 }
