@@ -9,5 +9,7 @@ import enums.DownloadCompleteEnum;
 public interface DownloadCompleteListener {
     void downloadComplete(String response, String error);
     void getRoomsComplete(String message);
-    //void gotLatLon(String message);
+    void createRoomsComplete(String message, Integer statusCode);
+    void getMessagesComplete(String message, Integer statusCode);
+    void createMessagesComplete(String message, Integer statusCode);
 }

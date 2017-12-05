@@ -6,8 +6,8 @@ public enum EndpointsEnum {
     LOGIN(String.format("%s/api/v1/auth/login",EndpointsEnum.URL.getValue())),
     CREATE_ROOM(String.format("%s/api/v1/rooms",EndpointsEnum.URL.getValue())),
     SEARCH_ROOMS(String.format("%s/api/v1/rooms/search",EndpointsEnum.URL.getValue())),
-    GET_MESSAGES(String.format("%s/api/v1/rooms/:room/messages",EndpointsEnum.URL.getValue())),
-    SEND_MESSAGE(String.format("%s/api/v1/rooms/:room/messages",EndpointsEnum.URL.getValue()));
+    GET_MESSAGES(EndpointsEnum.URL.getValue()+"/api/v1/rooms/%s/messages?last=%s&lat=%s&lon=%s"),
+    SEND_MESSAGE(EndpointsEnum.URL.getValue()+"/api/v1/rooms/%s/messages");
 
     private final String value;
 

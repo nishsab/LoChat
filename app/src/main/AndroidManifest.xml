@@ -28,8 +28,12 @@
             android:parentActivityName=".LoginScreen" />
         <activity
             android:name=".ListRoomsScreen"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".LoginScreen" />
-        <activity android:name=".ChatPage"></activity>
+        <activity android:name=".ChatPage" />
+        <activity android:name=".ChatRoom"
+            android:windowSoftInputMode="stateHidden"
+            android:parentActivityName=".ListRoomsScreen" ></activity>
     </application>
 
 </manifest>

@@ -51,15 +51,18 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
     LocationManager locationManager = null;
 
     @Override
+    public void getMessagesComplete(String message, Integer statusCode) {
+    }
+
+    @Override
+    public void createMessagesComplete(String message, Integer statusCode) {
+    }
+
+    @Override
     public void downloadComplete(String response, String error) {
         if (!response.equals("")) {
-                /*final Intent intent = new Intent(this, HomeScreen.class);
-                //intent.putExtra(EMAIL, "test");
-                intent.putExtra(LAT, this.lat);
-                intent.putExtra(LON, this.lon);
-                startActivity(intent);*/
-            //getRooms(response);
-            getLatLon(response);
+            final Intent intent = new Intent(this, ListRoomsScreen.class);
+            startActivity(intent);
         } else {
             AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
             dlgAlert.setMessage(error);
@@ -75,6 +78,10 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                         }
                     });
         }
+    }
+
+    @Override
+    public void createRoomsComplete(String message, Integer statusCode) {
     }
 
     @Override
@@ -123,7 +130,7 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                 });
     }
 
-    public void getLatLon(final String message) {
+  /*  public void getLatLon(final String message) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -191,11 +198,11 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                         getRooms(message);
                     }
                 });
-    }
+    }*/
 
     public void sendMessage(View view) {
-        String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
-        String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
+        //String EMAIL = ((EditText)findViewById(R.id.email)).getText().toString();
+        //String PASSWORD = ((EditText)findViewById(R.id.password)).getText().toString();
 
         makeRequestWithOkHttp(EndpointsEnum.LOGIN.getValue());
     }
@@ -204,13 +211,40 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
         makeRequestWithOkHttp("https://lochat.codyleyhan.com/api/v1/auth/register");
     }
 
+    public void buildError(String message) {
+        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+        dlgAlert.setMessage(message);
+        dlgAlert.setTitle("Error!");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+
+        dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+    }
+
     private void makeRequestWithOkHttp(String url) {
+        String email = ((EditText)findViewById(R.id.email)).getText().toString();
+        String password = ((EditText)findViewById(R.id.password)).getText().toString();
+        if (email == null || email.equals("")) {
+            buildError("Please enter an email!");
+            return;
+        }
+        if (password == null || password.equals("")) {
+            buildError("Please enter a password!");
+            return;
+        }
         JSONObject jObject = new JSONObject();
         try {
-            jObject.put("email","xyz@gmail.com");
-            jObject.put("password","xyzabc");
-//            jObject.put("email",EMAIL);
-//            jObject.put("password",PASSWORD);
+            //jObject.put("email","xyz@gmail.com");
+            //jObject.put("password","xyzabc");
+            jObject.put("email",email);
+            jObject.put("password",password);
+            System.out.println(email);
+            System.out.println(password);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -254,7 +288,7 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
         });
     }
 
-    private void getRooms(String token) {
+   /* private void getRooms(String token) {
         JSONObject jObject = new JSONObject();
         JSONObject coords = new JSONObject();
         try {
@@ -305,5 +339,5 @@ public class LoginScreen extends AppCompatActivity implements DownloadCompleteLi
                 });
             }
         });
-    }
+    }*/
 }

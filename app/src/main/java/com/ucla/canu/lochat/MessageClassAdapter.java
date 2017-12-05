@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import models.Room;
+import models.ChatMessage;
 
 /**
- * Created by nishsab on 11/19/17.
+ * Created by nishsab on 12/2/17.
  */
 
-public class RoomClassAdapter extends ArrayAdapter<Room> {
-    public RoomClassAdapter(Context context, ArrayList<Room> items) {
+public class MessageClassAdapter extends ArrayAdapter<ChatMessage> {
+    public MessageClassAdapter(Context context, ArrayList<ChatMessage> items) {
         super(context, 0, items);
     }
 
@@ -27,14 +27,10 @@ public class RoomClassAdapter extends ArrayAdapter<Room> {
         }
         TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
         TextView text2 = (TextView) convertView.findViewById(android.R.id.text2);
-                Room room = getItem(position);
-        text1.setText(room.getName());
-        text2.setText(String.format("(%f,%f) Radius: %.2f",room.getLat(),room.getLon(),room.getRadius()));
+        ChatMessage msg = getItem(position);
+        text1.setText(msg.getUserEmail());
+        text2.setText(msg.getText());
 
         return convertView;
-    }
-
-    public void getMessages(){
-
     }
 }

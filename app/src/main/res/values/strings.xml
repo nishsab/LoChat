@@ -7,4 +7,7 @@
     <string name="radius">Radius</string>
     <string name="create_room">Create Room</string>
     <string name="sign_out">Sign Out</string>
+    <string name="name">Chat Room Name</string>
+    <string name="send">Send</string>
+    <string name="message">Message ...</string>
 </resources>
